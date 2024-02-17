@@ -11,5 +11,5 @@ describe("Rover class", function() {
   it("constructor sets position and default values for mode and generatorWatts", function() {
     expect( function() { new Rover();}).toThrow(new Error('values are required'));
   });
-
+  
 });

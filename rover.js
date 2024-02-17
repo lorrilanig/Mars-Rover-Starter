@@ -11,16 +11,15 @@ class Rover {
       }
    }
    receiveMessage(message) {
-      message = new Message
-      
+      //response returns the message.name
+      //response returned includes two results if two commands are sent
+      //responds correctly to status check command
+      //responds correctly to mode change command
+      //responds with a false completed value when attempting to move in low power
+      //responds with the position for the move command
+      return response
    }
 }
-let commands = [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('STATUS_CHECK')];
-let message = new Message('Test message with two commands', commands);
-let rover = new Rover(98382);    // Passes 98382 as the rover's position.
-let response = rover.receiveMessage(message);
-
-console.log(response);
 
 
 module.exports = Rover;
