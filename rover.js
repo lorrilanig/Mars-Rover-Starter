@@ -12,37 +12,50 @@ class Rover {
    }
    receiveMessage(message) {
       //response returns the message.name
-      let response = [];
       let results = [];
-      message = new Message(message, results);
+      message = new Message(message);
       //response returned includes two results if two commands are sent
+      
       results = message.commands; 
+      
       //responds correctly to status check command
-      if (results.commands = 'STATUS_CHECK') {
+      if (this.mode === 'STATUS_CHECK') {
          let roverStatus = new Rover(this.mode, this.generatorWatts, this.position);
          results.push(roverStatus);
 
       }
       //responds correctly to mode change command
-      if (Command = 'MODE_CHANGE') {
+      if (this.mode  === 'MODE_CHANGE') {
          let completed = true; 
          this.mode = Command.value; 
          results.push(completed);
       }
       //responds with a false completed value when attempting to move in low power
-      if (Command = 'LOW_POWER') {
+      if (this.mode === 'LOW_POWER') {
          let completed = false;
          results.push(completed);
       }
-      if (Command = 'MOVE') {
-         roverStatus = this.position;
+      if (this.mode === 'MOVE') {
+         Rover.position = this.position;
       };
-      //responds with the position for the move command
-      response = [message,results]
-      return response
+      
+      return {message: this.message, results: this.results}
+      
    }
 }
+let rover = new Rover(100);
+let message = new Message('TA power');
+console.log(rover.receiveMessage(message))
 
 module.exports = Rover;
-
+// let rover = new Rover(100);
+// let commands = [
+//    new Command('MOVE', 4321),
+//    new Command('STATUS_CHECK'),
+//    new Command('MODE_CHANGE', 'LOW_POWER'),
+//    new Command('MOVE', 3579),
+//    new Command('STATUS_CHECK')
+// ];
+// let message = new Message('TA power', commands);
+// let response = rover.receiveMessage(message);
 //console.log(JSON.stringify(response,null, 2));
